@@ -2,7 +2,7 @@
 
 ## Overview
 
-This Travel Agent redefines trip planning by simplifying the complexities of travel arrangements. Built using Vertex AI, Cloud Functions, and BigQuery, it offers a seamless, personalized travel experience while harnessing the power of generative AI to deliver smart recommendations.
+This Travel Agent redefines trip planning by simplifying the complexities of travel arrangements. Built using Vertex AI, Cloud Functions, it offers a seamless, personalized travel experience while harnessing the power of generative AI to deliver smart recommendations.
 
 ## Problem Statement
 
