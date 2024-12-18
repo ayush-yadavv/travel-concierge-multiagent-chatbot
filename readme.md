@@ -27,7 +27,6 @@ The Travel Concierge Agent uses a robust cloud-based architecture, integrating v
 ### Technologies Used
 
 - Vertex AI Agent Builder for creating the AI-powered conversational agent.
-- BigQuery for storing and querying travel-related data.
 - Cloud Functions (Python) for backend processing and API integrations.
 - Google Cloud Storage for hosting FAQs, travel guides, and itineraries.
 
