@@ -1,0 +1,90 @@
+Tool Name:
+local-guide-tool
+Type:
+OpenAPI
+Description:
+This tool designed to provide users with a list of top 10 must-visit places and nearest 10 hotels based on a specified location. It allows users to easily retrieve recommendations for popular tourist spots and nearby accommodations, using data from the Google Places API.
+schema: YAML
+openapi: 3.0.0
+info:
+  title: Local Guide API
+  version: 1.0.0
+  description: API to fetch must-visit places and nearest hotels for a given location
+servers:
+  - url: ''
+paths:
+  /local_guide:
+    post:
+      summary: Get top 10 must-visit places for a location
+      operationId: getLocalGuide
+      requestBody:
+        description: Location for which to fetch must-visit places 
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - location
+              properties:
+                location:
+                  type: string
+                  description: The name of the city or location (e.g., "New York") to fetch guide information for
+      responses:
+        '200':
+          description: A list of top 10 must-visit places for the location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  places:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Place'
+              example:
+                places:
+                  - name: "Eiffel Tower"
+                    address: "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France"
+                  - name: "Louvre Museum"
+                    address: "Rue de Rivoli, 75001 Paris, France"
+        '400':
+          description: Bad Request (e.g., missing or invalid location)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error (e.g., issue with external API)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Place:
+      type: object
+      required:
+        - name
+        - address
+      properties:
+        name:
+          type: string
+          description: The name of the must-visit place
+        address:
+          type: string
+          description: The address of the must-visit place
+        description:
+          type: string
+          description: A brief description of the place
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags or categories for the place (e.g., "museum", "historical site")
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message

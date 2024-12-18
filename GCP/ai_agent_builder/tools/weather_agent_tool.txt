@@ -1,0 +1,69 @@
+Tool Name:
+weather-agent-cr
+Type:
+OpenAPI
+description:
+The Weather API is a simple tool that allows users to retrieve current weather information for any given location. By sending a POST request to the /get_weather endpoint, users can provide the name of a location (such as a city or town) and receive real-time weather data in response.
+Schema: YAMLopenapi: 3.0.0
+info:
+  title: Weather API
+  version: 1.0.0
+  description: API for retrieving current weather data for a given location
+servers:
+  - url: ''
+paths:
+  /get_weather:
+    post:
+      summary: Get current weather for a location
+      operationId: getWeather
+      requestBody:
+        description: Location for which to fetch weather data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - location
+              properties:
+                location:
+                  type: string
+                  description: The name of the city or location to fetch weather for
+      responses:
+        '200':
+          description: Current weather data for the location
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  location:
+                    type: string
+                    description: The location requested
+                  temperature:
+                    type: number
+                    format: float
+                    description: Current temperature in Celsius
+                  condition:
+                    type: string
+                    description: Weather condition (e.g., clear sky, rain)
+        '400':
+          description: Bad Request (e.g., missing or invalid location)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal Server Error (e.g., issue with external API)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message
